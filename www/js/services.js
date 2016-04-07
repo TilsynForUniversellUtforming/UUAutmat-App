@@ -23,3 +23,12 @@ angular.module('appMain.services', [])
         }
     }
 })
+.service("dummyData", function(){
+    return{
+        getTyper:function(){
+            var obj = [{"Name:":"Automat test 1"}];
+            return obj;
+        }
+
+    }
+})

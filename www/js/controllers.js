@@ -17,4 +17,11 @@ angular.module('appMain.controllers', [])
 .controller('mainMenuCtrl', function($scope){
 
 })
-.controller('overviewCtrl', function ($scope){});
+.controller('overviewCtrl', function ($scope, dummyData){
+
+    $scope.data = dummyData.getTyper();
+    console.log($scope.data);
+
+
+
+});
