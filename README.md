@@ -7,6 +7,7 @@ git clone https://github.com/rogerww/UUAutmat-App.git
 
 ### Installer:
 Bruk *npm* fra kommandolinje for å installere alle nødvendige komponenter: 
+
 *cd* inn i prosjektmappen.
 *npm install*
 
