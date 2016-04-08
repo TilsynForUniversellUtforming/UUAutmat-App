@@ -1,8 +1,14 @@
-Last ned (cmd): git clone https://github.com/rogerww/UUAutmat-App.git
-cd inn i mappen.
 
-for å installere alt du trenger for å kjøre appen
-npm install
+### Før du starter:
+Node.js og Ionic CLI må være innstallert. 
 
-kjøre appen
-ionic serve 
+### Last ned (cmd): 
+git clone https://github.com/rogerww/UUAutmat-App.git
+
+### Installer:
+Bruk *npm* fra kommandolinje for å installere alle nødvendige komponenter: 
+*cd* inn i prosjektmappen.
+*npm install*
+
+### Kjør fra cmd
+*ionic serve* 
