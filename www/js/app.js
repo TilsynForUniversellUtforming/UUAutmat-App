@@ -31,14 +31,12 @@ angular.module('appMain', ['ionic', 'appMain.controllers', 'appMain.services'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
+
     .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
   })
-
-  // Each tab has its own nav history stack:
   .state('mainMenu',{
     url:'/mainMenu',
     templateUrl:'templates/mainMenu.html',
