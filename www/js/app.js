@@ -54,9 +54,9 @@ angular.module('appMain', ['ionic', 'appMain.controllers', 'appMain.services'])
   })
   .state('overview', {
     url: '/overview',
+    cache: true,
     templateUrl: 'templates/overview.html',
     controller: 'overviewCtrl'
-
   });
    // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
