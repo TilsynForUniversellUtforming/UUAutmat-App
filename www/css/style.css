@@ -13,3 +13,11 @@
   width: 50%;
   
 }
+.odd{
+    background-color:#eee;
+}
+/*.pane-relative:{position:relative;}
+
+.pane, .view{
+    position:relative;
+}*/

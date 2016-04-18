@@ -1,0 +1,36 @@
+<ion-view class="pane-relative" view-title="Test Maler"> 
+     <ion-content class="padding " scroll="false" ng-hide="infoMsg.hide" style="position:relative;">
+    
+    <div ng-repeat="msg in infoMsg.messages" class="text-center">
+        <p><b>-{{msg.text}}</b></p>
+    </div>
+    <div class="text-center">    <button class="button button-assertive" ng-click="infoMsg.hide=true;">Skjul</button></div>
+    <br><br><br>
+    </ion-content>
+</ion-view>
+<ion-view view-title="Ny Test" name="nmytest-view">
+   
+  <ion-scroll  style="position:relative;margin-top: 0px;" has-bouncing="true">
+    <div class="secondary-bar">
+    
+    </div>
+    <br><br>
+    <div ng-repeat="template in templates" class="list"  >
+        <div class="list-item padding" ng-class-odd="'odd'" ng-class-even="'even'">
+            <h3>{{template.title}}</h3>
+            <div>
+                <p><b>Beskrivelse: </b>{{template.description}}</p>
+
+                <p><b>Fritekst: </b>{{template.freetext}}</p>
+                
+                <p><b>Indicators: </b>{{template.indicators.length}}</p>
+
+                <p><b>Testobjekter: </b>{{template.test_objects.length}} </p>
+                <button class="button button-calm" ng-click="startTest(template)">Start</button>
+                <button class="button" ng-click="infoMsg.messages=[{text:'Ikke implementert.'}];infoMsg.hide=false;">Se gjennom</button>
+            </div>
+        </div>
+
+    </div>
+  </ion-scroll>
+</ion-view>
