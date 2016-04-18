@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('appMain', ['ionic', 'appMain.controllers', 'appMain.services'])
+angular.module('appMain', ['ionic', 'appMain.controllers', 'appMain.services', 'ngResource'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -31,14 +31,12 @@ angular.module('appMain', ['ionic', 'appMain.controllers', 'appMain.services'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
+
     .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
   })
-
-  // Each tab has its own nav history stack:
   .state('mainMenu',{
     url:'/mainMenu',
     templateUrl:'templates/mainMenu.html',
@@ -49,16 +47,24 @@ angular.module('appMain', ['ionic', 'appMain.controllers', 'appMain.services'])
     templateUrl:'templates/options.html',
     controller:'mainMenuCtrl'
   })
-  .state('startTestNew',{
-    url:'/startTestNew',
-    templateUrl:'templates/startTestNew.html',
-    controller:'mainMenuCtrl'
+  .state('testsList',{
+    url:'/testsList',
+    templateUrl:'templates/testsList.html',
+    controller:'testsListCtrl'
+  })
+  .state('startNew',{
+    url:'/startTest',
+    templateUrl:'templates/startNew.html',
+    controller:'newTestCtrl',
+    params:{
+      temp:null
+    }
   })
   .state('overview', {
     url: '/overview',
+    cache: true,
     templateUrl: 'templates/overview.html',
     controller: 'overviewCtrl'
-
   });
    // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');

@@ -1,10 +1,54 @@
-<ion-view view-title="Oversikt" name="oversikt-view">
-  <ion-content class="">
-    <div class="secondary-bar">
-        <h1>Hello</h1>
-
+<ion-view>
+    <ion-view class="left-view">
+    <ion-content class="">
+    <div class="row ">
+        <div class="col">
+            <div class="row row-center oversiktListHeader">
+                <div class="col">
+                    <h2>Test Typer</h2>
+                </div>
+            </div>
+            <ion-list>
+                <ion-item ng-repeat="obj in testTyper" ng-click="TestTypeClick(obj)"  ng-class="{active: changeActiveTestType(obj)}" >
+                    <h2>{{obj.Name}}</h2>
+                </ion-item>
+            </ion-list>
+        </div>
     </div>
+    </ion-content>
+    </ion-view>
 
-    <h1>oversikt</h1>
-  </ion-content>
+    <ion-view class="mid-view">
+    <ion-content class="">
+    <div class="row ">
+
+        <div class="col">
+            <div class="row row-center oversiktListHeader">
+                <div class="col">
+                    <h2>Test Objekter</h2>
+                </div>
+            </div>
+             <ion-list>
+                <ion-item ng-repeat="test in testObjects" ng-click="updateTestDetails(test)"  >
+                    <h2>{{test.Titel}}</h2>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+    </ion-content>
+    </ion-view>
+
+    <ion-view class="right-view">
+    <ion-content class="">
+    <div class="row ">
+        <div class="col">
+            <div class="row row-center oversiktListHeader">
+                <div class="col">
+                    <h2>Test Detaljer</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    </ion-content>
+    </ion-view>
 </ion-view>

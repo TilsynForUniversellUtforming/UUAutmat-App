@@ -23,12 +23,12 @@ angular.module('appMain.services', [])
         }
     }
 })
-.service("dummyData", function(){
-    return{
-        getTyper:function(){
-            var obj = [{"Name:":"Automat test 1"}];
-            return obj;
-        }
-
-    }
+.factory('TestTemplateService', function($resource) {
+    return $resource('api/testTemplates/:id');
 })
+.factory('TestObjectService', function($resource) {
+    return $resource('api/nyobj/:id');
+})
+.factory('IndicatorService', function($resource) {
+    return $resource('api/indicators/:id');
+});

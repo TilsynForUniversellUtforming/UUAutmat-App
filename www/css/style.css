@@ -1,1 +1,23 @@
 /* Empty. Add your own CSS if you like */
+.pane.left-view {
+  left: 0;
+  width: 20%;
+}
+.pane.mid-view {
+  left: 20%;
+  width: 30%;
+
+}
+.pane.right-view {
+  left: 50%;
+  width: 50%;
+  
+}
+.odd{
+    background-color:#eee;
+}
+/*.pane-relative:{position:relative;}
+
+.pane, .view{
+    position:relative;
+}*/
