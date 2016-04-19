@@ -50,13 +50,15 @@ angular.module('appMain.controllers', [])
             this.current=this.states[this.index];
             if(this.current==0){this.previous=''}else{this.previous=this.states[this.index-1]}
             if(this.current==(this.states.length-1)){this.next=''}else{this.next=this.states[this.index+1]}
+                console.log("Setting state: " + this.index)
         },
         next2:function(){
-            console.log("burp")
+            console.log("lenght: " + this.states.length + " index: " + this.index)
             console.log(this.states)
-            if(!this.index>=(this.states.length-1)){
+            if(!(this.index >= this.states.length-1)){
                 this.index++;
                 this.setStates();
+                console.log("burp2")
             }
         },
         previous2:function(){
