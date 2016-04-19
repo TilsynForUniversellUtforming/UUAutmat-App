@@ -31,16 +31,62 @@ angular.module('appMain.controllers', [])
 
 })
 .controller('newTestCtrl', function($scope, $stateParams, TestObjectService, IndicatorService){
-    // $scope.template = $stateParams.temp;
-    // $scope.indicators = [];
-    // for(i=0; i < $scope.template.indicators.length; i++){
-    //     var r = IndicatorService.get({id:$scope.template.indicators[i]}, function(){
-    //         $scope.indicators.push(r);
-    //         console.log($scope.indicators)
-    //     })
-    // }
+    $scope.template = $stateParams.temp;
+    $scope.indicators = [];
+    $scope.test_objects = [];
+    $scope.test_state={
+        current:'',
+        previous:'',
+        next:'',
+        index:0,
+        states:['Generell Informasjon', 'Virksomhet / Lokale'],
+        addIndicator:function(ind){
+            this.states.push("Indikator: " + ind.name);
+        },
+        addTestObject:function(tobj){
+            this.states.push("TestObject: " + tobj.name);
+        },
+        setStates:function(){
+            this.current=this.states[this.index];
+            if(this.current==0){this.previous=''}else{this.previous=this.states[this.index-1]}
+            if(this.current==(this.states.length-1)){this.next=''}else{this.next=this.states[this.index+1]}
+        },
+        next2:function(){
+            console.log("burp")
+            console.log(this.states)
+            if(!this.index>=(this.states.length-1)){
+                this.index++;
+                this.setStates();
+            }
+        },
+        previous2:function(){
 
-    // console.log($scope.indicators)
+            if(!this.index==0){
+                this.index--;
+                this.setStates();
+            }
+        }
+
+    };
+    $scope.test={
+
+    }
+    for(i=0;i<$scope.template.test_objects.length;i++){
+         var r = TestObjectService.get({id:$scope.template.test_objects[i]}, function(){
+            $scope.test_objects.push(r);
+            $scope.test_state.addTestObject(r);
+            $scope.test_state.setStates();
+        })
+    }
+    for(i=0; i < $scope.template.indicators.length; i++){
+        var r = IndicatorService.get({id:$scope.template.indicators[i]}, function(){
+            $scope.indicators.push(r);
+            $scope.test_state.addIndicator(r);
+            $scope.test_state.setStates();
+        })
+    }
+
+
 })
 .controller('overviewCtrl', function ($scope, dummyData){
 

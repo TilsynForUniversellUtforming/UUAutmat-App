@@ -1,8 +1,17 @@
-<ion-view class="pane-relative" view-title="Ny test"> 
-     <ion-content has-subheader="true" class="padding " scroll="false" ng-hide="infoMsg.hide" style="position:relative;">
-       
+<ion-view class="pane-relative" view-title="Ny test">
+    <div class="bar bar-subheader">
+        <div class="row">
+            <div class="col"><h4 class="text-center" ng-click="test_state.previous2()" style="margin-top:0px; color:#999">{{test_state.previous}}</h4></div>
+            <div class="col"><h4 class="text-center" style="margin-top:0px">{{test_state.current}}</h4></div>
+            <div class="col"><h4 class="text-center" ng-click="test_state.next2()" style="margin-top:0px; color:#999">{{test_state.next}}</h4></div>
+        </div>
+    </div>
+    <ion-content has-subheader="true" class="padding ">
+    <br><br>
 
-   <h1>asdas</h1>
+    <div ng-show="test_state.current=='Generell Informasjon'">
+        
+    </div>
+
     </ion-content>
 </ion-view>
-
