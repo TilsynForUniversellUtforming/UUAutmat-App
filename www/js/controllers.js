@@ -35,22 +35,23 @@ angular.module('appMain.controllers', [])
     $scope.indicators = [];
     $scope.test_objects = [];
     $scope.test_state={
-        current:'',
-        previous:'',
-        next:'',
+        current:{name:'',type:'',index:null},
+        previous:{name:'',type:''},
+        next:{name:'',type:''},
         index:0,
-        states:['Generell Informasjon', 'Virksomhet / Lokale'],
+        states:[{name:'Generell Informasjon', type:'general_info'}, {name:'Virksomhet / Lokale', type:'virksomhet_lokale'}],
         addIndicator:function(ind){
-            this.states.push("Indikator: " + ind.name);
+            this.states.push(ind);
         },
         addTestObject:function(tobj){
-            this.states.push("TestObject: " + tobj.name);
+            this.states.push(tobj);
         },
         setStates:function(){
             this.current=this.states[this.index];
-            if(this.current==0){this.previous=''}else{this.previous=this.states[this.index-1]}
-            if(this.current==(this.states.length-1)){this.next=''}else{this.next=this.states[this.index+1]}
-                console.log("Setting state: " + this.index)
+            if(this.index==0){this.previous=''}else{this.previous=this.states[this.index-1]}
+            if(this.index==(this.states.length-1)){this.next=''}else{this.next=this.states[this.index+1]}
+                console.log("Setting state: " + this.states[this.index].type)
+            console.log(this.states)
         },
         next2:function(){
             console.log("lenght: " + this.states.length + " index: " + this.index)
@@ -70,20 +71,28 @@ angular.module('appMain.controllers', [])
         }
 
     };
-    $scope.test={
 
+    $scope.test={
+        indicators:[],
+        test_objects:[]
     }
+    var t=0,t1=0;
+
     for(i=0;i<$scope.template.test_objects.length;i++){
-         var r = TestObjectService.get({id:$scope.template.test_objects[i]}, function(){
-            $scope.test_objects.push(r);
-            $scope.test_state.addTestObject(r);
+        TestObjectService.get({id:$scope.template.test_objects[i]}, function(d){
+            $scope.test_objects.push(d);
+            var obj={name:d.name, type:'test_object', index:t}
+            t++;
+            $scope.test_state.addTestObject(obj);
             $scope.test_state.setStates();
         })
     }
     for(i=0; i < $scope.template.indicators.length; i++){
-        var r = IndicatorService.get({id:$scope.template.indicators[i]}, function(){
+        IndicatorService.get({id:$scope.template.indicators[i]}, function(r){
             $scope.indicators.push(r);
-            $scope.test_state.addIndicator(r);
+            var obj={name:r.name, type:'indicator', index:t1}
+            t1++;
+            $scope.test_state.addIndicator(obj);
             $scope.test_state.setStates();
         })
     }
