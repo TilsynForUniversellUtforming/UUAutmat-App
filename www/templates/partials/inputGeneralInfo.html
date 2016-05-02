@@ -1,0 +1,33 @@
+<div ng-show="test_state.current.type=='general_info'" class="row" style="width:60%;margin:auto">
+    <div class="col">
+        <div class="list">
+            <div class="item item-divider">Om testen</div>
+            <label class="item item-input item-label">
+                <span class="input-label">Test type:</span>
+                <span>{{test.title}}</span>
+            </label>
+            
+            <label class="item item-input item-label">
+                <span class="input-label">Test Person:</span>
+                <span>Roger</span>
+            </label>
+            <label class="item item-input item-label">
+                <span class="input-label">Beskrivelse:</span>
+                <span>{{test.description}}</span>
+            </label>
+            <div class="item item-divider">Fyll inn:</div>
+            <label class="item item-input item-label">
+                <span class="input-label">Test navn:</span>
+                <input type="text" placeholder="Velg et navn" ng-model="test.name">
+            </label>
+            <label class="item item-input item-label">
+                <span class="input-label" >Fritekst:</span>
+                <textarea type="text" placeholder="" rows="3" ng-model="test.freetext"></textarea>
+            </label>
+            <ion-checkbox ng-model="test.geolocation">Bruk geolocation</ion-checkbox>
+        </div>
+        <button class="button button-stable" ng-click="test_state.next2()">
+        Neste
+        </button>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+<div class="input" >
+    <div ng-repeat="alt in input.alternatives">
+        <ion-radio name="{{input.text+'_'+activity.text}}"  ng-click="setRadioAltAnswer(input, alt)">{{alt.text}}</ion-radio>
+    </div>
+</div>

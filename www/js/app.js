@@ -5,68 +5,80 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('appMain', ['ionic', 'appMain.controllers', 'appMain.services', 'ngResource'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+.run(function($ionicPlatform)
+{
+    $ionicPlatform.ready(function()
+    {
+        if (window.cordova && window.cordova.plugins.Keyboard)
+        {
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
+            // Don't remove this line unless you know what you are doing. It stops the viewport
+            // from snapping when text inputs are focused. Ionic handles this internally for
+            // a much nicer keyboard experience.
+            cordova.plugins.Keyboard.disableScroll(true);
+        }
+        if (window.StatusBar)
+        {
+            StatusBar.styleDefault();
+        }
+    });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider)
+{
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
+    // Ionic uses AngularUI Router which uses the concept of states
+    // Learn more here: https://github.com/angular-ui/ui-router
+    // Set up the various states which the app can be in.
+    // Each state's controller can be found in controllers.js
+    $stateProvider
 
 
-    .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html',
-    controller: 'loginCtrl'
-  })
-  .state('mainMenu',{
-    url:'/mainMenu',
-    templateUrl:'templates/mainMenu.html',
-    controller:'mainMenuCtrl'
-  })
-  .state('options',{
-    url:'/options',
-    templateUrl:'templates/options.html',
-    controller:'mainMenuCtrl'
-  })
-  .state('testsList',{
-    url:'/testsList',
-    templateUrl:'templates/testsList.html',
-    controller:'testsListCtrl'
-  })
-  .state('startNew',{
-    url:'/startTest',
-    templateUrl:'templates/startNew.html',
-    controller:'newTestCtrl',
-    params:{
-      temp:null
-    }
-  })
-  .state('overview', {
-    url: '/overview',
-    cache: true,
-    templateUrl: 'templates/overview.html',
-    controller: 'overviewCtrl'
-  });
-   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+    .state('login',
+    {
+        url: '/login',
+        templateUrl: 'templates/login.html',
+        controller: 'loginCtrl'
+    })
+        .state('mainMenu',
+        {
+            url: '/mainMenu',
+            templateUrl: 'templates/mainMenu.html',
+            controller: 'mainMenuCtrl'
+        })
+        .state('options',
+        {
+            url: '/options',
+            templateUrl: 'templates/options.html',
+            controller: 'mainMenuCtrl'
+        })
+        .state('testsList',
+        {
+            url: '/testsList',
+            templateUrl: 'templates/testsList.html',
+            controller: 'testTemplateListController'
+        })
+        .state('startNew',
+        {
+            url: '/startTest',
+            templateUrl: 'templates/startNew.html',
+            controller: 'testController',
+            params:
+            {
+                temp: null
+            }
+        })
+        .state('overview',
+        {
+            url: '/overview',
+            cache: true,
+            templateUrl: 'templates/overview.html',
+            controller: 'overviewCtrl'
+        });
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/login');
 
 });

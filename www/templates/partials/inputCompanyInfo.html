@@ -1,0 +1,29 @@
+<div  ng-show="test_state.current.type=='virksomhet_lokale'" style="width:60%;margin:auto">
+    <div class="row">
+        <div class="col">
+            <div class="list">
+                <label class="item item-input item-label">
+                    <span class="input-label">Virksomhet:</span>
+                    <input type="text" placeholder="Virksomehetens navn" ng-model="test.company_name">
+                </label>
+                <label class="item item-input item-label">
+                    <span class="input-label">Hvor er automaten</span>
+                    <input type="text" placeholder="" ng-model="test.test_object_placement">
+                </label>
+                <label class="item item-input item-label">
+                    <span class="input-label">Etasje</span>
+                    <input type="text" placeholder="" ng-model="test.company_floor">
+                </label>
+                
+                <label class="item item-input item-label">
+                    <span class="input-label">Hvor mange automater av samme type finnes til stede?</span>
+                    <input type="text" placeholder="" ng-model="test.test_object_count">
+                </label>
+                
+            </div>
+            <button class="button button-stable" ng-click="test_state.next2()">
+            Neste
+            </button>
+        </div>
+    </div>
+</div>
