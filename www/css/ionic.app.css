@@ -9726,25 +9726,71 @@ a.button {
   padding: 0;
   margin: 0 0 0 0; }
 
-.MenuAlternatives {
-  background-color: #eee;
-  text-align: center; }
-  .MenuAlternatives ul {
-    list-style-type: none;
-    margin: auto;
-    width: 22.5%;
-    padding: 0;
-    overflow: hidden;
-    background-color: #fff; }
-    .MenuAlternatives ul li {
-      border: 1px #444 solid;
-      margin: 1%;
-      float: left; }
-      .MenuAlternatives ul li a {
-        display: block;
-        color: #444;
-        text-align: center;
-        padding: 14px 16px;
-        font-weight: bold;
-        text-decoration: none;
-        text-transform: uppercase; }
+.MenuAlternatives ul {
+  list-style-type: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  background-color: #fff;
+  max-width: 1000px; }
+  .MenuAlternatives ul li {
+    border: 3px #444 solid;
+    border-radius: 1px;
+    margin: 1.8%;
+    float: left; }
+    .MenuAlternatives ul li a {
+      display: block;
+      color: #444;
+      text-align: center;
+      font-weight: bold;
+      text-decoration: none;
+      text-transform: uppercase; }
+      .MenuAlternatives ul li a:hover {
+        background: LightGrey; }
+
+.button-style {
+  padding: 90px;
+  background: #fff;
+  width: 290px;
+  height: 290px; }
+
+.icon {
+  font-size: 50px; }
+
+.padding {
+  font: 13px/20px 'Lucida Grande', Tahoma, Verdana, sans-serif;
+  color: #404040;
+  background: #fff; }
+
+.container {
+  margin: auto;
+  max-width: 420px;
+  overflow: hidden;
+  border: 3px solid; }
+
+.list {
+  position: relative;
+  margin: auto;
+  padding: 20px 20px 20px;
+  max-width: 420px;
+  background: white;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3); }
+  .list input[type=text], .list input[type=password] {
+    margin: 10px;
+    padding: 0 10px;
+    width: 200px;
+    height: 34px;
+    color: #404040;
+    background: white;
+    border: 1px solid;
+    border-color: #c4c4c4 #d1d1d1 #d4d4d4;
+    border-radius: 2px;
+    outline: 5px solid #eff4f7;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12); }
+    .list input[type=text]:focus, .list input[type=password]:focus {
+      border-color: #7dc9e2;
+      outline-color: #dceefc;
+      outline-offset: 0; }
