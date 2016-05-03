@@ -1,13 +1,10 @@
-<div class="list" ng-repeat="activity in indicators[test_state.current.index].activities">
-    <div class="item">
-        <h2>Activity: {{$index + 1}} {{activity.text}}</h2>
-        <div ng-repeat="input in activity.inputs">
-            <h4>Tekst: {{input.text}}</h4>
-            
-            
-            <!-- INPUT TYPE HERE -->
-            
-            
-        </div>
+<div class="item activity">
+    <div class="row activity-bar"><h2>Activity: {{$index + 1}} {{activity.text}}</h2></div>
+    
+    <div class="activity-input" ng-repeat="input in activity.inputs" >
+        <h3>Tekst: {{input.text}}</h3>
+        {{input.type}}
+        <div ng-include="getInputFieldTemplate(input.type)"></div>
+        
     </div>
 </div>

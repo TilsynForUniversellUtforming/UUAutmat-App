@@ -1,5 +1,8 @@
 <div class="input" >
     <div ng-repeat="alt in input.alternatives">
-        <ion-checkbox name="{{input.text + $index + $parent.$index}}" ng-model="input.answer">{{alt.text}}</ion-checkbox>
+        <ion-checkbox name="{{input.text}}" 
+        ng-model="alt.selected" 
+        
+        >{{alt.text}}</ion-checkbox>
     </div>
 </div>
