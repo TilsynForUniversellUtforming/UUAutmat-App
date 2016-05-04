@@ -1,221 +1,34 @@
 <ion-view class="pane-relative" view-title="Ny test">
 <div class="bar bar-subheader">
     <div class="row">
-        <div class="col"><h4 class="text-center" ng-click="test_state.previous2()" style="margin-top:0px; color:#999">{{test_state.previous.name}}</h4></div>
-        <div class="col"><h4 class="text-center" style="margin-top:0px">{{test_state.current.name}}</h4></div>
-        <div class="col"><h4 class="text-center" ng-click="test_state.next2()" style="margin-top:0px; color:#999">{{test_state.next.name}}</h4></div>
+        <div class="col">
+            <h4 class="text-center" 
+            ng-click="previousSection()"
+            style="margin-top:0px; color:#999">
+            {{getSection(sectionIndex-1).name}}
+            </h4>
+        </div>
+        <div class="col">
+            <h4 class="text-center" 
+            style="margin-top:0px">
+            {{sectionsInfo[sectionIndex].name}}
+            </h4>
+        </div>
+        <div class="col">
+            <h4 class="text-center" 
+            ng-click="nextSection()" 
+            style="margin-top:0px; color:#999">
+            {{getSection(sectionIndex+1).name}}
+            </h4>
+        </div>
     </div>
 </div>
 <ion-content has-subheader="true" class="padding ">
 <br><br>
-<div ng-show="test_state.current.type=='general_info'" class="row" style="width:60%;margin:auto">
-    <div class="col">
-        <div class="list">
-            <div class="item item-divider">Om testen</div>
-            <label class="item item-input item-label">
-                <span class="input-label">Test type:</span>
-                <span>{{test.title}}</span>
-            </label>
-            
-            <label class="item item-input item-label">
-                <span class="input-label">Test Person:</span>
-                <span>Roger</span>
-            </label>
-            <label class="item item-input item-label">
-                <span class="input-label">Beskrivelse:</span>
-                <span>{{test.description}}</span>
-            </label>
-            <div class="item item-divider">Fyll inn:</div>
-            <label class="item item-input item-label">
-                <span class="input-label">Test navn:</span>
-                <input type="text" placeholder="Velg et navn" ng-model="test.name">
-            </label>
-            <label class="item item-input item-label">
-                <span class="input-label" >Fritekst:</span>
-                <textarea type="text" placeholder="" rows="3" ng-model="test.freetext"></textarea>
-            </label>
-            <ion-checkbox ng-model="test.geolocation">Bruk geolocation</ion-checkbox>
-        </div>
-        <button class="button button-stable" ng-click="test_state.next2()">
-        Neste
-        </button>
-    </div>
-</div>
-<div  ng-show="test_state.current.type=='virksomhet_lokale'" style="width:60%;margin:auto">
-    <div class="row">
-        <div class="col">
-            <div class="list">
-                <label class="item item-input item-label">
-                    <span class="input-label">Virksomhet:</span>
-                    <input type="text" placeholder="Virksomehetens navn" ng-model="test.company_name">
-                </label>
-                <label class="item item-input item-label">
-                    <span class="input-label">Hvor er automaten</span>
-                    <input type="text" placeholder="" ng-model="test.test_object_placement">
-                </label>
-                <label class="item item-input item-label">
-                    <span class="input-label">Etasje</span>
-                    <input type="text" placeholder="" ng-model="test.company_floor">
-                </label>
-                
-                <label class="item item-input item-label">
-                    <span class="input-label">Hvor mange automater av samme type finnes til stede?</span>
-                    <input type="text" placeholder="" ng-model="test.test_object_count">
-                </label>
-                
-            </div>
-            <button class="button button-stable" ng-click="test_state.next2()">
-            Neste
-            </button>
-        </div>
-    </div>
-</div>
-<div  ng-show="test_state.current.type=='test_object'" style="width:60%;margin:auto">
-    <div class="row">
-        <div class="col">
-            <h2>Test Object {{test_state.current.index}}: {{test_objects[test_state.current.index].name}}</h2>
-            <div class="list" ng-repeat="property in test_objects[test_state.current.index].properties">
-                
-                <label class="item item-input item-label">
-                    <span class="input-label">{{property.name}}:</span>
-                    <input ng-model="property.answer" ng-show="property.type=='Fritekst'" type="text" placeholder="skriv inn svar...">
-                    <div ng-show="property.type=='janei'">yes no</div>
-                    <input ng-model="property.answer" ng-show="property.type=='Numerisk'" type="number" placeholder="...">
-                </label>
-                
-            </div>
-            <button class="button button-stable" ng-click="test_state.next2()">
-            Neste
-            </button>
-        </div>
-    </div>
-</div>
-<div  ng-show="test_state.current.type=='indicator'" style="width:60%;margin:auto">
-    <div class="row">
-        <div class="col">
-            
-            <div class="list" ng-repeat="activity in indicators[test_state.current.index].activities">
-                <div class="item">
-                    <h2>Activity: {{$index + 1}} {{activity.text}}</h2>
-                    <div ng-repeat="input in activity.inputs">
-                        <h4>Tekst: {{input.text}}</h4>
-                        <div class="input input-picture" ng-show="input.type=='picture'">
-                            <button class="button button-stable">Ta bilde</button>
-                            <button class="button button-stable">Bla gjennom...</button>
-                        </div>
-                        <div class="input" ng-show="input.type=='yesno'">
-                            <ion-radio name="{{$index+input.text}}" ng-model="input.answer" ng-value="true">Ja</ion-radio>
-                            <ion-radio name="{{$index+input.text}}" ng-model="input.answer" ng-value="false">Nei</ion-radio>
-                        </div>
-                        <div class="input" ng-show="input.type=='radio'">
-                            <div ng-repeat="alt in input.alternatives">
-                                <ion-radio name="{{input.text+'_'+activity.text}}"  ng-click="setRadioAltAnswer(input, alt)">{{alt.text}}</ion-radio>
-                            </div>
-                        </div>
-                        <div class="input" ng-show="input.type=='checkbox'">
-                            <div ng-repeat="alt in input.alternatives">
-                                <ion-checkbox name="{{input.text + $index + $parent.$index}}" ng-model="input.answer">{{alt.text}}</ion-checkbox>
-                            </div>
-                        </div>
-                        <div class="input" ng-show="input.type=='text'">
-                            <input name="{{$index+'text'}}" type="text" placeholder="Svar" ng-model="input.answer">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="button button-stable" ng-click="test_state.next2()" >
-            Neste
-            </button>
-            <button class="button button-stable" ng-click="test()" >
-            Test
-            </button>
-          
-          
-        </div>
-    </div>
-</div>
-<div ng-show="test_state.current.type=='overview'" style="width:60%;margin:auto">
-    <div class="row">
-        <div class="col">
-            <h1>Oversikt</h1>
-            <div class="list">
-                <div class="item item-divider">Om testen</div>
-                <label class="item item-input item-label">
-                <span class="input-label">Test type:</span>
-                <span>{{test.title}}</span>
-            </label>
-            
-            <label class="item item-input item-label">
-                <span class="input-label">Test Person:</span>
-                <span>Roger</span>
-            </label>
-            <label class="item item-input item-label">
-                <span class="input-label">Beskrivelse:</span>
-                <span>{{test.description}}</span>
-            </label>
-            <div class="item item-divider">Fyll inn:</div>
-            <label class="item item-input item-label">
-                <span class="input-label">Test navn: {{test.name}}</span>
-                <span> {{test.name}}</span>
-            </label>
-            <label class="item item-input item-label">
-                <span class="input-label" >Fritekst:</span>
-                <span>  {{test.freetext}}</span>
-            </label>
-            <label class="item item-label item-input">
-                <span class="input-label">Bruk geolocation: </span>
-                <span><b ng-show="test.geolocation==true">Ja</b><b ng-hide="test.geolocation==true">Nei</b></span>
-            </label>
-                <div class="item item-divider">Test objekter</div>
-                <div class="item" ng-repeat="obj in test_objects">
-                    <b>Type: {{obj.name}}</b>
-                    <i class="ion-edit"></i>
-                    <div ng-repeat="prop in obj.properties" >
-                        <label class="item item-input item-label">
-                            <span class="input-label 
-                            ">{{prop.name}} :</span>
-                            <span> {{prop.answer}}</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="item item-divider">Virksomhet og lokale</div>
-                <div class="item">
-                    <label class="item item-label item-input">
-                        <span class="input-label">Virksomhet: </span>
-                        <span>{{test.company_name}}</span>
-                         </label>
-                        <label class="item item-label item-input">
-                        <span class="input-label">Hvor er automaten: </span>
-                        <span>{{test.test_object_placement}}</span>
-                         </label>
-                        <label class="item item-label item-input">
-                        <span class="input-label">Etasje </span>
-                        <span>{{test.company_floor}}</span>
-                         </label>
-                        <label class="item item-label item-input">
-                        <span class="input-label">Antall test objekter av samme type: </span>
-                        <span>{{test.test_object_count}}</span>
-                         </label>
-                   
-                </div>
-                <div class="item item-divider">Indikatorer</div>
-                <div class="item" ng-repeat="ind in indicators">
-                    <h2> Navn: {{ind.name}}</h2>
-                    <div ng-repeat="act in ind.activities" >
-                        <h3>{{act.text}}</h3>
-                        <div ng-repeat="input in act.inputs">
-                            <p><b>text:</b> {{input.text}}</p>
-                            <p><b>Answer:</b> {{input.answer}}</p>
-      </b>                  </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-</div>
-<!-- </div>
-</div>
-</div> -->
+<!-- GENERAL INFOMRASJON HERE -->
+<!-- COMPANY INFO -->
+<!-- TEST OBJECTS -->
+<!-- INDICATOR HERE -->
+<!-- OVERVIEW HERE -->
 </ion-content>
 </ion-view>

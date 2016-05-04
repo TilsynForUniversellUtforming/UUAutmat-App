@@ -1,0 +1,21 @@
+
+<div  ng-show="test_state.current.type=='test_object'" style="width:60%;margin:auto">
+    <div class="row">
+        <div class="col">
+            <h2>Test Object {{test_state.current.index}}: {{test_objects[test_state.current.index].name}}</h2>
+            <div class="list" ng-repeat="property in test_objects[test_state.current.index].properties">
+                
+                <label class="item item-input item-label">
+                    <span class="input-label">{{property.name}}:</span>
+                    <input ng-model="property.answer" ng-show="property.type=='Fritekst'" type="text" placeholder="skriv inn svar...">
+                    <div ng-show="property.type=='janei'">yes no</div>
+                    <input ng-model="property.answer" ng-show="property.type=='Numerisk'" type="number" placeholder="...">
+                </label>
+                
+            </div>
+            <button class="button button-stable" ng-click="test_state.next2()">
+            Neste
+            </button>
+        </div>
+    </div>
+</div>

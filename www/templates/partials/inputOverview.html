@@ -1,0 +1,83 @@
+<div ng-show="test_state.current.type=='overview'" style="width:60%;margin:auto">
+    <div class="row">
+        <div class="col">
+            <h1>Oversikt</h1>
+            <div class="list">
+                <div class="item item-divider">Om testen</div>
+                <label class="item item-input item-label">
+                    <span class="input-label">Test type:</span>
+                    <span>{{test.title}}</span>
+                </label>
+                
+                <label class="item item-input item-label">
+                    <span class="input-label">Test Person:</span>
+                    <span>Roger</span>
+                </label>
+                <label class="item item-input item-label">
+                    <span class="input-label">Beskrivelse:</span>
+                    <span>{{test.description}}</span>
+                </label>
+                <div class="item item-divider">Fyll inn:</div>
+                <label class="item item-input item-label">
+                    <span class="input-label">Test navn: {{test.name}}</span>
+                    <span> {{test.name}}</span>
+                </label>
+                <label class="item item-input item-label">
+                    <span class="input-label" >Fritekst:</span>
+                    <span>  {{test.freetext}}</span>
+                </label>
+                <label class="item item-label item-input">
+                    <span class="input-label">Bruk geolocation: </span>
+                    <span><b ng-show="test.geolocation==true">Ja</b><b ng-hide="test.geolocation==true">Nei</b></span>
+                </label>
+                <div class="item item-divider">Test objekter</div>
+                <div class="item" ng-repeat="obj in test_objects">
+                    <b>Type: {{obj.name}}</b>
+                    <i class="ion-edit"></i>
+                    <div ng-repeat="prop in obj.properties" >
+                        <label class="item item-input item-label">
+                            <span class="input-label
+                            ">{{prop.name}} :</span>
+                            <span> {{prop.answer}}</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="item item-divider">Virksomhet og lokale</div>
+                <div class="item">
+                    <label class="item item-label item-input">
+                        <span class="input-label">Virksomhet: </span>
+                        <span>{{test.company_name}}</span>
+                    </label>
+                    <label class="item item-label item-input">
+                        <span class="input-label">Hvor er automaten: </span>
+                        <span>{{test.test_object_placement}}</span>
+                    </label>
+                    <label class="item item-label item-input">
+                        <span class="input-label">Etasje </span>
+                        <span>{{test.company_floor}}</span>
+                    </label>
+                    <label class="item item-label item-input">
+                        <span class="input-label">Antall test objekter av samme type: </span>
+                        <span>{{test.test_object_count}}</span>
+                    </label>
+                    
+                </div>
+                <div class="item item-divider">Indikatorer</div>
+                <div class="item" ng-repeat="ind in indicators">
+                    <h2> Navn: {{ind.name}}</h2>
+                    <div ng-repeat="act in ind.activities" >
+                        <h3>{{act.text}}</h3>
+                        <div ng-repeat="input in act.inputs">
+                            <p><b>text:</b> {{input.text}}</p>
+                            <p><b>Answer:</b> {{input.answer}}</p>
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+</div>
+</div>
+</div>
