@@ -5,7 +5,7 @@ angular.module('appMain.services')
 
         function getResource()
         {
-            return $resource('api/indicators/:id');
+        return $resource('http://localhost:3000/api/indicators/:id');
         }
 
         function getIndicator()
