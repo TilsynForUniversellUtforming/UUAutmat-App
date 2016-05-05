@@ -2,21 +2,21 @@
 <div class="bar bar-subheader">
     <div class="row">
         <div class="col">
-            <h4 class="text-center" 
+            <h4 class="text-center"
             ng-click="previousSection()"
             style="margin-top:0px; color:#999">
             {{getSection(sectionIndex-1).name}}
             </h4>
         </div>
         <div class="col">
-            <h4 class="text-center" 
+            <h4 class="text-center"
             style="margin-top:0px">
             {{sectionsInfo[sectionIndex].name}}
             </h4>
         </div>
         <div class="col">
-            <h4 class="text-center" 
-            ng-click="nextSection()" 
+            <h4 class="text-center"
+            ng-click="nextSection()"
             style="margin-top:0px; color:#999">
             {{getSection(sectionIndex+1).name}}
             </h4>
@@ -25,10 +25,17 @@
 </div>
 <ion-content has-subheader="true" class="padding ">
 <br><br>
-<!-- GENERAL INFOMRASJON HERE -->
-<!-- COMPANY INFO -->
-<!-- TEST OBJECTS -->
-<!-- INDICATOR HERE -->
-<!-- OVERVIEW HERE -->
+<!-- Appropriate view will be chose basen on section type -->
+<div ng-include="getSection(sectionIndex).templateUrl"></div>
+<div class="row">'
+    <div class="col"></div>
+    <div class="col">
+        <button style="width:100%" class="button button-stable" ng-click="previousSection()">Tilbake</button>
+    </div>
+    <div class="col">
+        <button style="width:100%" class="button button-stable" ng-click="nextSection()">Neste</button>
+    </div>
+    <div class="col"></div>
+</div>
 </ion-content>
 </ion-view>

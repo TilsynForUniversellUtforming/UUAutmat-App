@@ -1,12 +1,17 @@
-<div  ng-show="test_state.current.type=='indicator'" style="width:60%;margin:auto">
-    <div class="row">
-        <div class="col">
-            
-           <!-- ACTIVITIES HERE -->
-
-            <button class="button button-stable" ng-click="test_state.next2()" >
-            Neste
-            </button>
+<div class="row test-section">
+    <div class="col">
+    <!-- <h2>{{currentIndicator.name}}</h2> -->
+    <!-- <hr> -->
+    <p><b>Beskrivelse: </b>{{currentIndicator.description}}
+    A nice, simple indicator. </p>
+    <p ng-show="currentIndicator.comment != null"><b>Kommentarer: </b>{{currentIndicator.comment}}<span ng-hide="currentIndicator.comment !=''">ingen</span></p>
+    <p>
+        <b>Antall aktiviteter: </b>{{currentIndicator.activities.length}}
+    </p>
+        
+        <div ng-repeat="activity in currentIndicator.activities">
+            <div ng-include="'templates/partials/inputActivity.html'"></div>
         </div>
+        
     </div>
 </div>

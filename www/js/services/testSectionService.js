@@ -2,18 +2,51 @@ angular.module('appMain.services')
     .factory('TestSectionService', function()
     {
         var index = 0;
+        var cheat = 0;
+        var inputTypes = [
+        {
+            name: "yesno",
+            url: "templates/partials/inputs/yesno.html"
+        },
+        {
+            name: "radio",
+            url: "templates/partials/inputs/radio.html"
+        },
+        {
+            name: "checkbox",
+            url: "templates/partials/inputs/checkbox.html"
+        },
+        {
+            name: "freetext",
+            url: "templates/partials/inputs/freetext.html"
+        },
+        {
+            name: "text",
+            url: "templates/partials/inputs/freetext.html"
+        },
+        {
+            name: "numeric",
+            url: "templates/partials/inputs/numeric.html"
+        },
+        {
+            name: "picture",
+            url: "templates/partials/inputs/picture.html"
+        }];
         var sections = [
         {
             name: 'Generell Informasjon',
-            type: 'general_info'
+            type: 'general_info',
+            templateUrl: 'templates/partials/inputGeneralInfo.html'
         },
         {
             name: 'Virksomhet / Lokale',
-            type: 'virksomhet_lokale'
+            type: 'virksomhet_lokale',
+            templateUrl: 'templates/partials/inputCompanyInfo.html'
         },
         {
             name: "Oppsummering",
-            type: 'overview'
+            type: 'overview',
+            templateUrl: 'templates/partials/inputOverview.html'
         }];
 
         function addIndicator(ind)
@@ -23,7 +56,8 @@ angular.module('appMain.services')
 
         function addTestObject(tobj)
         {
-            sections.splice(sections.length - 1, 0, tobj);
+            sections.splice((2 + cheat), 0, tobj);
+            cheat++;
         }
 
         function nextSection()
@@ -40,7 +74,8 @@ angular.module('appMain.services')
         {
             return {
                 name: '',
-                type: ''
+                type: '',
+                templateUrl: ''
             }
         }
 
@@ -70,7 +105,13 @@ angular.module('appMain.services')
                 index--;
             }
         }
+
+        function getInputTypes()
+        {
+            return inputTypes;
+        }
         return {
+            getInputTypes: getInputTypes,
             addTestObject: addTestObject,
             addIndicator: addIndicator,
             previousSection: previousSection,

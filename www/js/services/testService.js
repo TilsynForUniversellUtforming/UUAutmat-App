@@ -39,6 +39,7 @@ angular.module('appMain.services')
                 var obj = {
                     name: r.name,
                     type: 'indicator',
+                    templateUrl: 'templates/partials/inputIndicator.html',
                     index: t
                 }
                 t++;
@@ -73,6 +74,7 @@ angular.module('appMain.services')
                 var obj = {
                     name: d.name,
                     type: 'test_object',
+                    templateUrl: 'templates/partials/inputTestObject.html',
                     index: t
                 }
                 t++;

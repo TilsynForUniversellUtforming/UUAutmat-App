@@ -1,21 +1,23 @@
-
-<div  ng-show="test_state.current.type=='test_object'" style="width:60%;margin:auto">
-    <div class="row">
-        <div class="col">
-            <h2>Test Object {{test_state.current.index}}: {{test_objects[test_state.current.index].name}}</h2>
-            <div class="list" ng-repeat="property in test_objects[test_state.current.index].properties">
+<div class="row test-section">
+    <div class="col">
+        <h3>Test Object 1 av 1</h3>
+        <p>
+            Beskrivelse: What a horse is, everybody knows.
+        </p>
+        <div class="list" ng-repeat="input in testObjects[getSection(sectionIndex).index].properties">
+            
+            <div class="test-object input" style="border:1px solid grey; padding:20px">
+                <p>
+                    <h4>Egenskap: {{input.text}}</h4>
+                </p>
+                <!-- <p>
+                    {{input.type}} <span ng-show="input.subtype">{{input.subtype}}</span>
+                </p> -->
                 
-                <label class="item item-input item-label">
-                    <span class="input-label">{{property.name}}:</span>
-                    <input ng-model="property.answer" ng-show="property.type=='Fritekst'" type="text" placeholder="skriv inn svar...">
-                    <div ng-show="property.type=='janei'">yes no</div>
-                    <input ng-model="property.answer" ng-show="property.type=='Numerisk'" type="number" placeholder="...">
-                </label>
-                
+                <div ng-include="getInputFieldTemplate(input.type)"></div>
+                <ion-checkbox ng-model="input.not_relevant">Ikke relevant</ion-checkbox>
             </div>
-            <button class="button button-stable" ng-click="test_state.next2()">
-            Neste
-            </button>
         </div>
+        
     </div>
 </div>
