@@ -33,11 +33,12 @@
         <button style="width:100%" class="button button-stable" ng-click="previousSection()">Tilbake</button>
     </div>
     <div class="col">
-        <button style="width:100%" class="button button-stable" ng-click="nextSection()">Neste</button>
+        <button ng-hide="getSection(sectionIndex).type == 'overview'" style="width:100%" class="button button-stable" ng-click="nextSection()">Neste</button>
+        <button ng-show="getSection(sectionIndex).type == 'overview'" style="width:100%" class="button button-stable" ng-click="finishTest()">Ferdig</button>
     </div>
-     <div class="col">
+    <!--  <div class="col">
         <button style="width:100%" class="button button-stable" ng-click="showTestRes()">TEST</button>
-    </div>
+    </div> -->
     <div class="col"></div>
 </div>
 </ion-content>

@@ -44,6 +44,14 @@ angular.module('appMain.controllers')
         TestResultService.prepareResults($scope.test, $scope.indicators, $scope.testObjects);
         $scope.jsonshow(TestResultService.getResults())
     }
+    $scope.finishTest = function()
+    {
+        console.log(" " + $scope.indicators.length + " " +
+            $scope.testObjects.length)
+        TestResultService.prepareResults($scope.test, $scope.indicators, $scope.testObjects);
+        var res = TestResultService.saveResults();
+
+    }
 
     function setCurrentObjects()
     {
