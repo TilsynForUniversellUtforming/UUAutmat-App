@@ -16,7 +16,7 @@ angular.module('appMain.services')
 
     function getResource()
     {
-        return $resource('http://localhost:3000/api/testTemplates/:id');
+        return $resource('api/testTemplates/:id');
     }
     return {
         getTemplate: getTemplate,
