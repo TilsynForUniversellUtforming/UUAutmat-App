@@ -1,6 +1,6 @@
 angular.module('appMain.controllers')
 
-.controller('testController', function($scope, $stateParams, TestObjectService, IndicatorService, TestService, TestTemplateService, TestSectionService)
+.controller('testController', function($scope, $stateParams, TestObjectService, IndicatorService, TestService, TestTemplateService, TestSectionService, TestResultService)
 {
     if ($stateParams.temp !== null)
     {
@@ -34,6 +34,15 @@ angular.module('appMain.controllers')
         $scope.sectionsInfo = TestSectionService.getSections();
         $scope.sectionIndex = TestSectionService.getIndex();
         $scope.inputTypes = TestSectionService.getInputTypes();
+    }
+    $scope.jsonshow = function(obj)
+    {
+        console.log(JSON.stringify(obj))
+    }
+    $scope.showTestRes = function()
+    {
+        TestResultService.prepareResults($scope.test, $scope.indicators, $scope.testObjects);
+        $scope.jsonshow(TestResultService.getResults())
     }
 
     function setCurrentObjects()
