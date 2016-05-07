@@ -8,14 +8,19 @@ angular.module('appMain.services')
     function getBlank()
     {
         var a = {
-            test:
-            {},
+            template_id: null,
             data:
             {
                 score:
                 {
                     score: 0,
                     max_score: 0
+                },
+                general:
+                {},
+                company:
+                {
+                    name: ''
                 },
                 test_objects: [],
                 indicators: []
@@ -24,10 +29,21 @@ angular.module('appMain.services')
         return a;
     }
 
-    function prepareResults(temp, inds, tobjs)
+    function prepareResults(template, inds, tobjs, comp)
     {
         result = getBlank();
-        result.test = temp;
+        result.template_id = template._id;
+        // console.log("Template is: ")
+        // console.log(template)
+        result.data.general = {
+            title: template.title,
+            test_person: template.test_person,
+            freetext: template.freetext,
+            geolocation: template.geolocation
+        }
+        result.data.company = comp;
+        // console.log("1 result is: ")
+        // console.log(result)
         for (let i = 0; i < inds.length; i++)
         {
             var ind = prepareIndicator(inds[i]);
@@ -36,13 +52,16 @@ angular.module('appMain.services')
             result.data.score.max_score = ind.max_score;
             result.data.indicators.push(ind);
         }
+        // console.log("2 result is: ")
+        // console.log(result)
         for (let j = 0; j < tobjs.length; j++)
         {
             var tobj = prepareTestObject(tobjs[j]);
             console.log("working on rest object: " + tobj.name)
             result.data.test_objects.push(tobj);
         }
-
+        // console.log("3 result is: ")
+        // console.log(result)
         ready = true;
     }
 

@@ -25,6 +25,7 @@ angular.module('appMain.controllers')
 
     function init()
     {
+        $scope.company = {};
         $scope.test = TestService.getTemplate();
         TestService.setupTest();
 
@@ -41,14 +42,14 @@ angular.module('appMain.controllers')
     }
     $scope.showTestRes = function()
     {
-        TestResultService.prepareResults($scope.test, $scope.indicators, $scope.testObjects);
+        TestResultService.prepareResults($scope.test, $scope.indicators, $scope.testObjects, $scope.company);
         $scope.jsonshow(TestResultService.getResults())
     }
     $scope.finishTest = function()
     {
         console.log(" " + $scope.indicators.length + " " +
             $scope.testObjects.length)
-        TestResultService.prepareResults($scope.test, $scope.indicators, $scope.testObjects);
+        TestResultService.prepareResults($scope.test, $scope.indicators, $scope.testObjects, $scope.company);
         var res = TestResultService.saveResults();
 
     }

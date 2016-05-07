@@ -1,9 +1,9 @@
 angular.module('appMain.controllers')
-    .controller('overviewCtrl', function($scope, dummyData)
+    .controller('overviewCtrl', function($scope, testResultService, testService, testTemplateService)
     {
 
-        $scope.testTyper = dummyData.getTyper();
-        console.log($scope.testTyper[0]);
+        $scope.templates = TestTemplateService.getResource().query();
+
 
 
         var activeTestType = {};
