@@ -1,20 +1,26 @@
 angular.module('appMain.services')
 
-.service('TestResultService', function()
+.service('TestResultService', function($resource)
 {
     var result = getBlank();
+    var ready = false;
 
     function getBlank()
     {
         var a = {
-            test:
-            {},
+            template_id: null,
             data:
             {
                 score:
                 {
                     score: 0,
                     max_score: 0
+                },
+                general:
+                {},
+                company:
+                {
+                    name: ''
                 },
                 test_objects: [],
                 indicators: []
@@ -23,28 +29,72 @@ angular.module('appMain.services')
         return a;
     }
 
-    function prepareResults(temp, inds, tobjs)
+    function prepareResults(template, inds, tobjs, comp)
     {
         result = getBlank();
-        result.test = temp;
-
-        for (i = 0; i < inds.length; i++)
+        result.template_id = template._id;
+        // console.log("Template is: ")
+        // console.log(template)
+        result.data.general = {
+            title: template.title,
+            test_person: template.test_person,
+            freetext: template.freetext,
+            geolocation: template.geolocation
+        }
+        result.data.company = comp;
+        // console.log("1 result is: ")
+        // console.log(result)
+        for (let i = 0; i < inds.length; i++)
         {
             var ind = prepareIndicator(inds[i]);
+            console.log("working on ind: " + ind.name)
             result.data.score.score += ind.score;
-            result.data.score.max_score += ind.max_score;
+            result.data.score.max_score = ind.max_score;
             result.data.indicators.push(ind);
         }
-        for (i = 0; i < tobjs.length; i++)
+        // console.log("2 result is: ")
+        // console.log(result)
+        for (let j = 0; j < tobjs.length; j++)
         {
-            var tobj = prepareTestObject(tobjs[i]);
-            result.data.test_objects.push(ind);
+            var tobj = prepareTestObject(tobjs[j]);
+            console.log("working on rest object: " + tobj.name)
+            result.data.test_objects.push(tobj);
         }
+        // console.log("3 result is: ")
+        // console.log(result)
+        ready = true;
     }
 
     function getResults()
     {
         return result;
+    }
+
+    function saveResults()
+    {
+        if (!ready)
+        {
+            console.log("not ready");
+            return;
+        }
+        var res = {
+            msg: ''
+        };
+        // ready = false;
+        getResource().save(result, function(resp, headers)
+        {
+            console.log(resp);
+            console.log("all good")
+            result = getBlank();
+            res.msg = "OK";
+
+        }, function(err)
+        {
+            console.log("an error!")
+            console.log(err)
+            res.msg = "Error";
+        })
+        return res;
     }
 
     function prepareTestObject(obj)
@@ -55,9 +105,9 @@ angular.module('appMain.services')
             properties: [],
             created_at: obj.created_at
         }
-        for (i = 0; i < obj.properties.length; i++)
+        for (let i = 0; i < obj.properties.length; i++)
         {
-            var prop = prepareInput(obj.properties[j])
+            var prop = prepareInput(obj.properties[i])
             testObj.properties.push(prop);
         }
         return testObj;
@@ -75,7 +125,7 @@ angular.module('appMain.services')
             activities: []
 
         };
-        for (i = 0; i < ind.activities.length; i++)
+        for (let i = 0; i < ind.activities.length; i++)
         {
             var a = ind.activities[i];
             var actRes = {
@@ -85,7 +135,7 @@ angular.module('appMain.services')
                 score: 0,
                 inputs: []
             };
-            for (j = 0; j < a.inputs.length; j++)
+            for (let j = 0; j < a.inputs.length; j++)
             {
                 var inp = prepareInput(a.inputs[j])
                 actRes.score += inp.score;
@@ -230,7 +280,7 @@ angular.module('appMain.services')
                 break;
             case 'radio':
             case 'checkbox':
-                for (i = 0; i < inp.alternatives.length; i++)
+                for (let i = 0; i < inp.alternatives.length; i++)
                 {
                     // count total points earned
                     if (inp.alternatives[i].selected === inp.alternatives[i].corrent)
@@ -262,6 +312,7 @@ angular.module('appMain.services')
     return {
         getResource: getResource,
         prepareResults: prepareResults,
-        getResults: getResults
+        getResults: getResults,
+        saveResults: saveResults
     }
 })
