@@ -1,5 +1,7 @@
 <ion-view view-title="Login" name="login-view">
   <ion-content class="padding">
+     <div class= "container" style="margin-top:17%;">
+
       <form class="list list-inset" ng-submit="login()">
           <label class="item item-input">
               <input type="text" placeholder="Username" ng-model="data.username">
@@ -7,7 +9,10 @@
           <label class="item item-input">
               <input type="password" placeholder="Password" ng-model="data.password">
           </label>
-      <button class="button button-block button-calm" ng-click="login()">Login</button>
+           <button class="button button-block button-calm" ng-click="login()">Login</button>
+           <a>Porblemer med login?</a>
       </form>
+      
+     </div>
   </ion-content>
 </ion-view>
