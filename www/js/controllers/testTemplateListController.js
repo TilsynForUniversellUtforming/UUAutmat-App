@@ -18,6 +18,7 @@ angular.module('appMain.controllers')
     }
     $scope.startTest = function(temp)
     {
+        console.log("STARTING TEST")
         $state.go('startNew',
         {
             temp: temp

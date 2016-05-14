@@ -9,8 +9,10 @@
                 </div>
             </div>
             <ion-list>
-                <ion-item ng-repeat="obj in testTyper" ng-click="TestTypeClick(obj)"  ng-class="{active: changeActiveTestType(obj)}" >
-                    <h2>{{obj.Name}}</h2>
+                <ion-item ng-repeat="temp in templates" ng-click="TestTypeClick(temp)"  ng-class="{active: changeActiveTestType(temp)}" >
+                    <h2>{{temp.title}}</h2>
+                    <span>id: {{temp._id}}</span>
+                    <p>{{temp.description}}</p>
                 </ion-item>
             </ion-list>
         </div>

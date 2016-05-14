@@ -16,11 +16,21 @@ angular.module('appMain.services')
 
     function getResource()
     {
-        return $resource('api/testTemplates/:id');
+        return $resource('http://torden.rogerww.com/api/testTemplates/:id');
+    }
+
+    function getTemplates()
+    {
+
+        //if online we should update data from db and display it
+        return getResource().query();
+        //in case we are offline we just return our local data, if we have any.
+
     }
     return {
         getTemplate: getTemplate,
         setTemplate: setTemplate,
+        getTemplates: getTemplates,
         getResource: getResource
     }
 })

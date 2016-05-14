@@ -1,17 +1,25 @@
 angular.module('appMain.controllers')
-    .controller('overviewCtrl', function($scope, testResultService, testService, testTemplateService)
+    .controller('overviewCtrl', function($scope, TestResultService, TestService, TestTemplateService)
     {
 
-        $scope.templates = TestTemplateService.getResource().query();
-
+        $scope.templates = TestTemplateService.getTemplates();
+        console.log("Templates are: ")
+        console.log($scope.templates)
 
 
         var activeTestType = {};
-        $scope.testObjects = [];
+        $scope.tests = [];
         $scope.TestTypeClick = function(obj)
         {
             activeTestType = obj;
-            $scope.testObjects = dummyData.getTestObjekter(obj.ID);
+            console.log("id is " + obj._id)
+            $scope.tests = '';
+            var res = TestResultService.getResource().get(
+            {
+                template_id: obj._id
+            }, function(r) {
+
+            });
 
         }
         $scope.changeActiveTestType = function(obj)

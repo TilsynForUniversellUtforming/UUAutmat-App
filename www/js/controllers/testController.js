@@ -13,7 +13,7 @@ angular.module('appMain.controllers')
         console.log("Test template NOT present, getting default for tests")
         TestTemplateService.getResource().get(
         {
-            id: '5728051cee4c45c435627a8b'
+            id: '57308ad12bb619b763e230f3'
         }, function(t)
         {
             console.log("got it")

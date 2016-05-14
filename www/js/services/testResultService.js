@@ -44,7 +44,7 @@ angular.module('appMain.services')
         result.data.company = comp;
         // console.log("1 result is: ")
         // console.log(result)
-        for (let i = 0; i < inds.length; i++)
+        for (var i = 0; i < inds.length; i++)
         {
             var ind = prepareIndicator(inds[i]);
             console.log("working on ind: " + ind.name)
@@ -54,7 +54,7 @@ angular.module('appMain.services')
         }
         // console.log("2 result is: ")
         // console.log(result)
-        for (let j = 0; j < tobjs.length; j++)
+        for (var j = 0; j < tobjs.length; j++)
         {
             var tobj = prepareTestObject(tobjs[j]);
             console.log("working on rest object: " + tobj.name)
@@ -105,7 +105,7 @@ angular.module('appMain.services')
             properties: [],
             created_at: obj.created_at
         }
-        for (let i = 0; i < obj.properties.length; i++)
+        for (var i = 0; i < obj.properties.length; i++)
         {
             var prop = prepareInput(obj.properties[i])
             testObj.properties.push(prop);
@@ -125,7 +125,7 @@ angular.module('appMain.services')
             activities: []
 
         };
-        for (let i = 0; i < ind.activities.length; i++)
+        for (var i = 0; i < ind.activities.length; i++)
         {
             var a = ind.activities[i];
             var actRes = {
@@ -135,7 +135,7 @@ angular.module('appMain.services')
                 score: 0,
                 inputs: []
             };
-            for (let j = 0; j < a.inputs.length; j++)
+            for (var j = 0; j < a.inputs.length; j++)
             {
                 var inp = prepareInput(a.inputs[j])
                 actRes.score += inp.score;
@@ -280,7 +280,7 @@ angular.module('appMain.services')
                 break;
             case 'radio':
             case 'checkbox':
-                for (let i = 0; i < inp.alternatives.length; i++)
+                for (var i = 0; i < inp.alternatives.length; i++)
                 {
                     // count total points earned
                     if (inp.alternatives[i].selected === inp.alternatives[i].corrent)
@@ -307,12 +307,18 @@ angular.module('appMain.services')
 
     function getResource()
     {
-        return $resource('/api/testResults/:id');
+        return $resource('http://torden.rogerww.com/api/testResults/:id');
+    }
+
+    function getResults(queryObj, callback)
+    {
+        return getResource().get(queryObj);
     }
     return {
         getResource: getResource,
         prepareResults: prepareResults,
         getResults: getResults,
-        saveResults: saveResults
+        saveResults: saveResults,
+        getResource: getResource
     }
 })

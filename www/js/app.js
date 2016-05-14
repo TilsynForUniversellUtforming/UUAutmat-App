@@ -79,6 +79,6 @@ angular.module('appMain', ['ionic', 'appMain.controllers', 'appMain.services', '
             controller: 'overviewCtrl'
         });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/mainMenu');
 
 });

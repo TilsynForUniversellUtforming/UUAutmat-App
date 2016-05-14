@@ -15,7 +15,7 @@ angular.module('appMain.services')
 
         function getResource()
         {
-            return $resource('/api/nyobj/:id');
+            return $resource('http://torden.rogerww.com/api/testObjects/:id');
         }
         return {
             getResource: getResource,
