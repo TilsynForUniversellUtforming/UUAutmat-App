@@ -4,7 +4,7 @@ angular.module('appMain.controllers')
 .controller('testTemplateListController', function($scope, $state, TestTemplateService, TestObjectService)
 {
     $scope.templates = [];
-    $scope.templates = TestTemplateService.getResource().query();
+    $scope.templates = TestTemplateService.getTemplates();
     console.log($scope.templates)
     $scope.infoMsg = {
         messages: [

@@ -24,7 +24,9 @@
     {
       "locator": "https://github.com/jsHybugger/cordova-plugin-jshybugger.git",
       "id": "org.jshybugger.cordova"
-    }
+    },
+    "cordova-plugin-file",
+    "cordova-plugin-network-information"
   ],
   "cordovaPlatforms": [
     "android"
