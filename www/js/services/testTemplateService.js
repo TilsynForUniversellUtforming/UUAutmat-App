@@ -1,8 +1,9 @@
 angular.module('appMain.services')
 
-.service('TestTemplateService', function($resource, ConnectionService, FileService)
+.service('TestTemplateService', function($resource, ConnectionService, FileService, $rootScope, $q)
 {
     var template = null;
+    var templates = [];
 
     function getTemplate()
     {
@@ -21,22 +22,32 @@ angular.module('appMain.services')
 
     function getTemplates()
     {
-        if (ConnectionService.isOnline)
+        var deferred = $q.defer();
+
+        if (ConnectionService.getStatus())
         {
-            console.log("We are online, getting templates from remote server.")
-            var obj = getResource().query();
-            FileService.write('templates', JSON.stringify(obj))
-            return obj;
+            console.log("Application is online, getting templates from remote server.")
+            templates = getResource().query().$promise.then(function(result)
+            {
+                // console.log("we are writing this: " + JSON.stringify(result))
+                FileService.write('templates', JSON.stringify(result))
+                templates = result
+                console.log("templates retrieved")
+                deferred.resolve(templates);
+            });
         }
         else
         {
-            console.log("We are offline, getting templates from local file, if there are some.  reading")
-            var obj = JSON.parse(FileService.read('templates'))
-
+            console.log("Application is offline, getting templates from local file, if there are some.")
+            var text = FileService.read('templates').then(function(result)
+            {
+                templates = JSON.parse(result);
+                // console.log("we are returning read: " + JSON.stringify(templates))
+                deferred.resolve(templates);
+            });
         }
-        //if online we should update data from db and display it
 
-        //in case we are offline we just return our local data, if we have any.
+        return deferred.promise;
 
     }
     return {

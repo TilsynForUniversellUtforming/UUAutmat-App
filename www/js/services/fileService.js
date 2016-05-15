@@ -1,5 +1,5 @@
 angular.module('appMain.services')
-    .service("FileService", function($cordovaFile)
+    .service("FileService", function($cordovaFile, $rootScope, $q)
     {
         function write(filename, dataObj)
         {
@@ -32,7 +32,7 @@ angular.module('appMain.services')
 
         function read(filename)
         {
-            var stuff = "";
+            var deferred = $q.defer();
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs)
             {
 
@@ -47,19 +47,39 @@ angular.module('appMain.services')
                     console.log("fileEntry is file?" + fileEntry.isFile.toString());
                     // fileEntry.name == 'someFile.txt'
                     // fileEntry.fullPath == '/someFile.txt'
-                    readFile(fileEntry, stuff);
-                    return stuff;
+                    fileEntry.file(function(file)
+                    {
+                        var reader = new FileReader();
+
+                        reader.onloadend = function()
+                        {
+                            console.log("Successful file read: " + this.result);
+                            console.log(fileEntry.fullPath + ": " + this.result);
+                            deferred.resolve(this.result)
+                        };
+
+                        reader.readAsText(file);
+
+                    }, function()
+                    {
+                        console.log("error reading file")
+                        deferred.reject("error reading file");
+                    });
+
                 }, function()
                 {
                     console.log("error creating file")
-                    return stuff;
+                    deferred.reject("error creating file");
+
                 });
 
             }, function()
             {
                 console.log("error loading fs")
-                return stuff;
+                deferred.reject("error leading file system");
+
             });
+            return deferred.promise;
         }
 
         function writeFile(fileEntry, dataObj)
@@ -71,8 +91,8 @@ angular.module('appMain.services')
 
                 fileWriter.onwriteend = function()
                 {
-                    console.log("Successful file read...");
-                    readFile(fileEntry);
+                    console.log("Successful file write...");
+                    // readFile(fileEntry);
                 };
 
                 fileWriter.onerror = function(e)
@@ -94,7 +114,7 @@ angular.module('appMain.services')
             });
         }
 
-        function readFile(fileEntry, target)
+        function readFile(fileEntry)
         {
             fileEntry.file(function(file)
             {
@@ -104,7 +124,7 @@ angular.module('appMain.services')
                 {
                     console.log("Successful file read: " + this.result);
                     console.log(fileEntry.fullPath + ": " + this.result);
-                    target = this.result
+                    $rootScope.$broadcast("readDone", this.result);
                 };
 
                 reader.readAsText(file);

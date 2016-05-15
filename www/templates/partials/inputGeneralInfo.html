@@ -24,7 +24,12 @@
                 <span class="input-label" >Fritekst:</span>
                 <textarea type="text" placeholder="" rows="3" ng-model="test.freetext"></textarea>
             </label>
-            <ion-checkbox ng-model="test.geolocation">Bruk geolocation</ion-checkbox>
+            <ion-checkbox ng-value="true" ng-model="test.geolocation" ng-checked="setGeolocation()" >Bruk geolocation</ion-checkbox>
+            <p ng-show="test.geolocation">
+            Lat: {{test.geolocationData.coords.latitude}}
+            Lon: {{test.geolocationData.coords.longitude}}
+            Alt: {{test.geolocationData.coords.altitude}}
+            Accuracy: {{test.geolocationData.coords.accuracy}}</p>
         </div>
         
     </div>

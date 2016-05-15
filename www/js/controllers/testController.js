@@ -22,11 +22,48 @@ angular.module('appMain.controllers')
         });
     }
 
+    $scope.setGeolocation = function()
+    {
+        $scope.test.geolocation = !$scope.test.geolocation
+        if ($scope.test.geolocation)
+        {
+
+            navigator.geolocation.getCurrentPosition(function(position)
+            {
+                console.log('Latitude: ' + position.coords.latitude + '\n' +
+                    'Longitude: ' + position.coords.longitude + '\n' +
+                    'Altitude: ' + position.coords.altitude + '\n' +
+                    'Accuracy: ' + position.coords.accuracy + '\n' +
+                    'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+                    'Heading: ' + position.coords.heading + '\n' +
+                    'Speed: ' + position.coords.speed + '\n' +
+                    'Timestamp: ' + position.timestamp + '\n');
+
+                $scope.$apply(function()
+                {
+                    $scope.test.geolocationData = position;
+                });
+            }, function onError(error)
+            {
+                console.log('code: ' + error.code + '\n' +
+                    'message: ' + error.message + '\n');
+                $scope.test.geolocationData = {
+                    msg: "unable to gather geolocation data"
+                };
+            });
+        }
+        else
+        {
+            $scope.test.geolocationData = null;
+            $scope.test.geolocation = false;
+        }
+    }
 
     function init()
     {
         $scope.company = {};
         $scope.test = TestService.getTemplate();
+        $scope.test.geolocationData = {};
         TestService.setupTest();
 
         $scope.indicators = TestService.getIndicators();

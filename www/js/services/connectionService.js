@@ -30,7 +30,7 @@ angular.module('appMain.services')
             }
             else
             {
-                console.log("we are using " + sstates[networkState]);
+                console.log("we are using " + states[networkState]);
                 onOnline();
             }
         }
@@ -48,8 +48,14 @@ angular.module('appMain.services')
             console.log("GOING OFFLINE")
             isOnline = false;
         }
+
+        function getStatus()
+        {
+            return isOnline;
+        }
         return {
             connectionType: connectionType,
-            isOnline: isOnline
+            isOnline: isOnline,
+            getStatus: getStatus
         }
     })
