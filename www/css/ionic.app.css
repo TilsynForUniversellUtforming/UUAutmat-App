@@ -9747,6 +9747,9 @@ a.button {
       text-transform: uppercase; }
       .MenuAlternatives ul li a:hover {
         background: LightGrey; }
+      .MenuAlternatives ul li a:focus {
+        background: lightBlue;
+        border-radius: 3px; }
 
 .button-style {
   padding: 90px;
@@ -9766,7 +9769,8 @@ a.button {
   margin: auto;
   max-width: 420px;
   overflow: hidden;
-  border: 3px solid; }
+  border: 3px solid;
+  border-color: LightGrey; }
 
 .list {
   position: relative;
@@ -9794,3 +9798,6 @@ a.button {
       border-color: #7dc9e2;
       outline-color: #dceefc;
       outline-offset: 0; }
+
+.button:focus {
+  background: lightBlue; }

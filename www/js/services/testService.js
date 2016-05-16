@@ -21,7 +21,7 @@ angular.module('appMain.services')
         return currentTemplate;
     }
 
-    function setIndicators(template = null)
+    function setIndicators(template)
     {
         if (template == null)
         {
@@ -56,7 +56,7 @@ angular.module('appMain.services')
         return indicators;
     }
 
-    function setTestObjects(template = null)
+    function setTestObjects(template)
     {
         if (template == null)
         {
