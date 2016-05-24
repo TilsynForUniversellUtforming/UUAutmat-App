@@ -17,26 +17,29 @@ angular.module('appMain.services')
 
     function getResource()
     {
+        console.log("getting resource for templates")
         return $resource('http://torden.rogerww.com/api/testTemplates/:id');
     }
 
     function getTemplates()
     {
+        //create a promise
         var deferred = $q.defer();
-
+        //check if we are online
         if (ConnectionService.getStatus())
         {
             console.log("Application is online, getting templates from remote server.")
             templates = getResource().query().$promise.then(function(result)
             {
-                // console.log("we are writing this: " + JSON.stringify(result))
+                //Write to local file to keep data up to date in case we need to work offline
                 FileService.write('templates', JSON.stringify(result))
                 templates = result
                 console.log("templates retrieved")
+                //when done retrieving data return them
                 deferred.resolve(templates);
             });
         }
-        else
+        else // we are offline, get data from file if possible
         {
             console.log("Application is offline, getting templates from local file, if there are some.")
             var text = FileService.read('templates').then(function(result)
@@ -46,7 +49,7 @@ angular.module('appMain.services')
                 deferred.resolve(templates);
             });
         }
-
+        //return promise - now its just on object, but it will contain our data at some point
         return deferred.promise;
 
     }

@@ -39,7 +39,8 @@ angular.module('appMain.services')
             title: template.title,
             test_person: template.test_person,
             freetext: template.freetext,
-            geolocation: template.geolocation
+            geolocation: template.geolocation,
+            goalocationData: template.geolocationData
         }
         result.data.company = comp;
         // console.log("1 result is: ")
